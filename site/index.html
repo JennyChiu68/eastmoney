@@ -32,10 +32,20 @@
       <section class="panel controls reveal" style="--delay: 0.05s">
         <div class="date-control-row">
           <button id="prevDateBtn" class="date-btn" type="button">前一日</button>
-          <label class="field date-field">
-            <span>交易日期（北京时间）</span>
-            <select id="dateSelect"></select>
-          </label>
+          <div class="date-picker-grid">
+            <label class="field short-field">
+              <span>年份</span>
+              <select id="yearSelect"></select>
+            </label>
+            <label class="field short-field">
+              <span>月份</span>
+              <select id="monthSelect"></select>
+            </label>
+            <label class="field date-field">
+              <span>交易日（北京时间）</span>
+              <select id="dateSelect"></select>
+            </label>
+          </div>
           <button id="nextDateBtn" class="date-btn" type="button">后一日</button>
         </div>
         <div class="meta-wrap">

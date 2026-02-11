@@ -8,9 +8,12 @@ const state = {
   marketFilter: "ALL",
   loadToken: 0,
   trendSeries: [],
+  calendar: new Map(),
 };
 
 const el = {
+  yearSelect: document.getElementById("yearSelect"),
+  monthSelect: document.getElementById("monthSelect"),
   dateSelect: document.getElementById("dateSelect"),
   prevDateBtn: document.getElementById("prevDateBtn"),
   nextDateBtn: document.getElementById("nextDateBtn"),
@@ -43,6 +46,11 @@ function classByChange(value) {
   return "change-flat";
 }
 
+function splitDate(dateStr) {
+  const [year, month] = String(dateStr || "").split("-");
+  return { year, month };
+}
+
 function toBeijingTimeText(utcIsoText) {
   if (!utcIsoText) return "-";
   const dt = new Date(utcIsoText);
@@ -59,10 +67,42 @@ function toBeijingTimeText(utcIsoText) {
   }).format(dt);
 }
 
-async function fetchJson(path) {
-  const resp = await fetch(path, { cache: "no-store" });
-  if (!resp.ok) throw new Error(`Request failed: ${path}`);
-  return resp.json();
+function fillSelect(selectEl, items, selected) {
+  selectEl.innerHTML = "";
+  items.forEach((item) => {
+    const option = document.createElement("option");
+    option.value = item.value;
+    option.textContent = item.label;
+    if (item.value === selected) option.selected = true;
+    selectEl.appendChild(option);
+  });
+}
+
+function buildCalendar(dates) {
+  const calendar = new Map();
+  dates.forEach((dateStr) => {
+    const { year, month } = splitDate(dateStr);
+    if (!calendar.has(year)) calendar.set(year, new Map());
+    const months = calendar.get(year);
+    if (!months.has(month)) months.set(month, []);
+    months.get(month).push(dateStr);
+  });
+  state.calendar = calendar;
+}
+
+function getYears() {
+  return Array.from(state.calendar.keys());
+}
+
+function getMonths(year) {
+  const months = state.calendar.get(year);
+  return months ? Array.from(months.keys()) : [];
+}
+
+function getDates(year, month) {
+  const months = state.calendar.get(year);
+  if (!months) return [];
+  return months.get(month) || [];
 }
 
 function currentIndex() {
@@ -90,18 +130,46 @@ function renderDatePills() {
     btn.addEventListener("click", async () => {
       if (d === state.currentDate) return;
       state.currentDate = d;
-      el.dateSelect.value = d;
-      renderDatePills();
-      updateNavButtons();
       await loadDay(d);
     });
     el.datePills.appendChild(btn);
   });
 }
 
+function renderCalendarControls() {
+  const dates = state.index?.dates || [];
+  if (!dates.length) return;
+
+  const { year: currentYear, month: currentMonth } = splitDate(state.currentDate);
+  const years = getYears();
+  const year = years.includes(currentYear) ? currentYear : years[0];
+
+  const months = getMonths(year);
+  const month = months.includes(currentMonth) ? currentMonth : months[0];
+
+  const dayDates = getDates(year, month);
+  const selectedDate = dayDates.includes(state.currentDate) ? state.currentDate : dayDates[0];
+  if (selectedDate && selectedDate !== state.currentDate) state.currentDate = selectedDate;
+
+  fillSelect(
+    el.yearSelect,
+    years.map((y) => ({ value: y, label: `${y}年` })),
+    year
+  );
+  fillSelect(
+    el.monthSelect,
+    months.map((m) => ({ value: m, label: `${Number(m)}月` })),
+    month
+  );
+  fillSelect(
+    el.dateSelect,
+    dayDates.map((d) => ({ value: d, label: d })),
+    state.currentDate
+  );
+}
+
 function renderIndex() {
   const dates = state.index?.dates || [];
-  el.dateSelect.innerHTML = "";
 
   if (!dates.length) {
     el.dateSelect.innerHTML = `<option value="">暂无数据</option>`;
@@ -109,15 +177,10 @@ function renderIndex() {
     return;
   }
 
-  dates.forEach((d) => {
-    const option = document.createElement("option");
-    option.value = d;
-    option.textContent = d;
-    el.dateSelect.appendChild(option);
-  });
-
   state.currentDate = state.currentDate || state.index.latest_date;
-  el.dateSelect.value = state.currentDate;
+  buildCalendar(dates);
+  renderCalendarControls();
+
   const bjText = toBeijingTimeText(state.index.generated_at_utc);
   el.generatedAt.textContent = `数据生成时间（北京时间）: ${bjText}`;
   renderDatePills();
@@ -318,6 +381,7 @@ async function loadDay(date) {
   renderMarketFilters(dayData);
   renderTable(dayData);
   renderRanks(dayData);
+  renderCalendarControls();
   renderDatePills();
   updateNavButtons();
   drawSparkline(state.trendSeries);
@@ -330,8 +394,31 @@ async function goOffset(step) {
   const target = dates[idx + step];
   if (!target) return;
   state.currentDate = target;
-  el.dateSelect.value = target;
   await loadDay(target);
+}
+
+async function onYearChange() {
+  const year = el.yearSelect.value;
+  const months = getMonths(year);
+  if (!months.length) return;
+
+  const keepMonth = months.includes(el.monthSelect.value)
+    ? el.monthSelect.value
+    : months[0];
+  const dates = getDates(year, keepMonth);
+  if (!dates.length) return;
+
+  state.currentDate = dates[0];
+  await loadDay(state.currentDate);
+}
+
+async function onMonthChange() {
+  const year = el.yearSelect.value;
+  const month = el.monthSelect.value;
+  const dates = getDates(year, month);
+  if (!dates.length) return;
+  state.currentDate = dates[0];
+  await loadDay(state.currentDate);
 }
 
 async function init() {
@@ -347,6 +434,14 @@ async function init() {
     el.stockTbody.innerHTML = `<tr><td colspan="6">加载失败: ${err.message}</td></tr>`;
   }
 }
+
+el.yearSelect.addEventListener("change", async () => {
+  await onYearChange();
+});
+
+el.monthSelect.addEventListener("change", async () => {
+  await onMonthChange();
+});
 
 el.dateSelect.addEventListener("change", async (e) => {
   state.currentDate = e.target.value;

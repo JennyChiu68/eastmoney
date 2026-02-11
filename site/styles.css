@@ -166,10 +166,17 @@ h1 {
 
 .date-control-row {
   display: grid;
-  grid-template-columns: 118px minmax(280px, 440px) 118px;
+  grid-template-columns: 118px minmax(300px, 640px) 118px;
   gap: 12px;
   align-items: end;
   justify-content: start;
+}
+
+.date-picker-grid {
+  display: grid;
+  grid-template-columns: 120px 110px minmax(180px, 1fr);
+  gap: 10px;
+  width: 100%;
 }
 
 .date-btn {
@@ -197,6 +204,10 @@ h1 {
 }
 
 .date-field {
+  width: 100%;
+}
+
+.short-field {
   width: 100%;
 }
 
@@ -477,6 +488,16 @@ td a:hover {
   .duo {
     grid-template-columns: 1fr;
   }
+
+  .date-control-row {
+    grid-template-columns: 96px minmax(240px, 1fr) 96px;
+    gap: 10px;
+  }
+
+  .date-picker-grid {
+    grid-template-columns: 96px 88px minmax(160px, 1fr);
+    gap: 8px;
+  }
 }
 
 @media (max-width: 620px) {
@@ -497,6 +518,10 @@ td a:hover {
   .date-control-row {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .date-picker-grid {
+    grid-template-columns: 1fr;
   }
 
   .date-btn {
