@@ -113,9 +113,7 @@ h1 {
   font-weight: 600;
 }
 
-select,
-input[type="date"],
-input[type="text"] {
+select {
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 10px 12px;
@@ -273,40 +271,6 @@ td a:hover {
   gap: 12px;
 }
 
-.history-controls {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
-  align-items: end;
-}
-
-.history-action-wrap {
-  display: flex;
-  align-items: end;
-  min-height: 100%;
-}
-
-.search-btn {
-  border: none;
-  border-radius: 10px;
-  padding: 10px 14px;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-  background: linear-gradient(135deg, #1a7f8e, #2da6b5);
-  color: #fff;
-}
-
-.search-btn:hover {
-  filter: brightness(0.96);
-}
-
-.history-meta {
-  margin: 12px 2px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
 .rank-list {
   margin: 0;
   padding-left: 20px;
@@ -349,10 +313,6 @@ td a:hover {
   .duo {
     grid-template-columns: 1fr;
   }
-
-  .history-controls {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 560px) {
@@ -371,9 +331,5 @@ td a:hover {
 
   .bar-row {
     grid-template-columns: 68px 1fr 38px;
-  }
-
-  .history-controls {
-    grid-template-columns: 1fr;
   }
 }

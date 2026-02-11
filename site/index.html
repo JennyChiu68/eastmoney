@@ -14,7 +14,7 @@
         <p class="eyebrow">Eastmoney LHB Dashboard</p>
         <h1>龙虎榜每日看板</h1>
         <p class="subtitle">
-          自动抓取东方财富龙虎榜数据，支持按日期与市场筛选浏览。
+          通过顶部日期切换查看历史交易日数据，支持按市场筛选浏览。
         </p>
       </header>
 
@@ -89,57 +89,6 @@
           </div>
           <ol id="losersList" class="rank-list"></ol>
         </article>
-      </section>
-
-      <section class="panel reveal" style="--delay: 0.3s">
-        <div class="section-head">
-          <h2>历史数据查询</h2>
-        </div>
-        <div class="history-controls">
-          <label class="field">
-            <span>开始日期</span>
-            <input id="historyStartDate" type="date" />
-          </label>
-          <label class="field">
-            <span>结束日期</span>
-            <input id="historyEndDate" type="date" />
-          </label>
-          <label class="field">
-            <span>关键词(代码/名称)</span>
-            <input id="historyKeyword" type="text" placeholder="如 600292 / 电投水电" />
-          </label>
-          <label class="field">
-            <span>市场</span>
-            <select id="historyMarket">
-              <option value="ALL">全部</option>
-              <option value="HS">沪市</option>
-              <option value="KCB">科创板</option>
-              <option value="SZ">深市</option>
-              <option value="BJ">京市</option>
-              <option value="KZZ">可转债</option>
-            </select>
-          </label>
-          <div class="history-action-wrap">
-            <button id="historySearchBtn" class="search-btn" type="button">查询</button>
-          </div>
-        </div>
-        <p id="historyResultMeta" class="history-meta">结果: -</p>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>日期</th>
-                <th>代码</th>
-                <th>名称</th>
-                <th>市场</th>
-                <th>涨跌幅</th>
-                <th>详情</th>
-                <th>行情</th>
-              </tr>
-            </thead>
-            <tbody id="historyTbody"></tbody>
-          </table>
-        </div>
       </section>
     </main>
     <script src="./app.js"></script>

@@ -1,11 +1,8 @@
-const HISTORY_LIMIT = 500;
-
 const state = {
   index: null,
   currentDate: null,
   dayData: null,
   marketFilter: "ALL",
-  historyRows: [],
 };
 
 const el = {
@@ -20,13 +17,6 @@ const el = {
   stockTbody: document.getElementById("stockTbody"),
   gainersList: document.getElementById("gainersList"),
   losersList: document.getElementById("losersList"),
-  historyStartDate: document.getElementById("historyStartDate"),
-  historyEndDate: document.getElementById("historyEndDate"),
-  historyKeyword: document.getElementById("historyKeyword"),
-  historyMarket: document.getElementById("historyMarket"),
-  historySearchBtn: document.getElementById("historySearchBtn"),
-  historyResultMeta: document.getElementById("historyResultMeta"),
-  historyTbody: document.getElementById("historyTbody"),
 };
 
 function fmtPercent(value) {
@@ -167,66 +157,6 @@ function renderRanks(dayData) {
   fillList(el.losersList, dayData.top_losers);
 }
 
-function setupHistoryDefaults() {
-  const dates = state.index?.dates || [];
-  if (!dates.length) return;
-  const latest = dates[0];
-  const earliest = dates[dates.length - 1];
-
-  el.historyStartDate.min = earliest;
-  el.historyStartDate.max = latest;
-  el.historyEndDate.min = earliest;
-  el.historyEndDate.max = latest;
-  el.historyStartDate.value = earliest;
-  el.historyEndDate.value = latest;
-}
-
-function filteredHistoryRows() {
-  const startDate = el.historyStartDate.value || "0000-01-01";
-  const endDate = el.historyEndDate.value || "9999-12-31";
-  const market = el.historyMarket.value || "ALL";
-  const keyword = (el.historyKeyword.value || "").trim().toLowerCase();
-
-  return state.historyRows.filter((row) => {
-    const date = String(row.trade_date || "");
-    if (date < startDate || date > endDate) return false;
-    if (market !== "ALL" && row.market_group !== market) return false;
-    if (!keyword) return true;
-    const code = String(row.security_code || "").toLowerCase();
-    const name = String(row.security_name || "").toLowerCase();
-    return code.includes(keyword) || name.includes(keyword);
-  });
-}
-
-function renderHistoryRows() {
-  const rows = filteredHistoryRows();
-  const shown = rows.slice(0, HISTORY_LIMIT);
-
-  el.historyTbody.innerHTML = "";
-  if (!shown.length) {
-    el.historyResultMeta.textContent = "结果: 0 条";
-    el.historyTbody.innerHTML = `<tr><td colspan="7">没有符合条件的数据</td></tr>`;
-    return;
-  }
-
-  shown.forEach((row) => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${row.trade_date || "-"}</td>
-      <td>${row.security_code || "-"}</td>
-      <td>${row.security_name || "-"}</td>
-      <td>${row.market_label || row.market_group || "-"}</td>
-      <td class="${classByChange(row.change_rate)}">${fmtPercent(row.change_rate)}</td>
-      <td><a href="${row.detail_link}" target="_blank" rel="noreferrer">详情</a></td>
-      <td><a href="${row.quote_link}" target="_blank" rel="noreferrer">行情</a></td>
-    `;
-    el.historyTbody.appendChild(tr);
-  });
-
-  const suffix = rows.length > shown.length ? `，仅展示前 ${HISTORY_LIMIT} 条` : "";
-  el.historyResultMeta.textContent = `结果: ${rows.length} 条${suffix}`;
-}
-
 async function loadDay(date) {
   const dayData = await fetchJson(`./data/days/${date}.json`);
   state.dayData = dayData;
@@ -240,34 +170,20 @@ async function loadDay(date) {
 
 async function init() {
   try {
-    const [indexData, historyData] = await Promise.all([
-      fetchJson("./data/index.json"),
-      fetchJson("./data/history.json"),
-    ]);
-    state.index = indexData;
-    state.historyRows = historyData.rows || [];
+    state.index = await fetchJson("./data/index.json");
     state.currentDate = state.index.latest_date;
-
     renderIndex();
-    setupHistoryDefaults();
-    renderHistoryRows();
-
     if (state.currentDate) {
       await loadDay(state.currentDate);
     }
   } catch (err) {
     el.stockTbody.innerHTML = `<tr><td colspan="6">加载失败: ${err.message}</td></tr>`;
-    el.historyTbody.innerHTML = `<tr><td colspan="7">加载失败: ${err.message}</td></tr>`;
   }
 }
 
 el.dateSelect.addEventListener("change", async (e) => {
   state.currentDate = e.target.value;
   await loadDay(state.currentDate);
-});
-
-el.historySearchBtn.addEventListener("click", () => {
-  renderHistoryRows();
 });
 
 init();
