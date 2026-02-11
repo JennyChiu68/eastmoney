@@ -1,0 +1,57 @@
+name: Eastmoney LHB Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "site/**"
+      - "tools/build_dashboard_data.py"
+      - "data/eastmoney_lhb/**"
+      - ".github/workflows/eastmoney-lhb-pages.yml"
+  workflow_run:
+    workflows: ["Eastmoney LHB Watch"]
+    types: [completed]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: eastmoney-lhb-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build dashboard data
+        run: |
+          python tools/build_dashboard_data.py \
+            --daily-dir data/eastmoney_lhb/daily \
+            --out-dir site/data
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

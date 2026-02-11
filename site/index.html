@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>东方财富龙虎榜看板</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb bg-orb-a"></div>
+    <div class="bg-orb bg-orb-b"></div>
+    <main class="container">
+      <header class="hero reveal">
+        <p class="eyebrow">Eastmoney LHB Dashboard</p>
+        <h1>龙虎榜每日看板</h1>
+        <p class="subtitle">
+          自动抓取东方财富龙虎榜数据，支持按日期与市场筛选浏览。
+        </p>
+      </header>
+
+      <section class="panel controls reveal" style="--delay: 0.05s">
+        <label class="field">
+          <span>选择日期</span>
+          <select id="dateSelect"></select>
+        </label>
+        <div class="meta">
+          <span id="generatedAt">数据生成时间: -</span>
+        </div>
+      </section>
+
+      <section class="metrics reveal" style="--delay: 0.1s">
+        <article class="panel metric-card">
+          <p>上榜个股</p>
+          <h3 id="totalCount">-</h3>
+        </article>
+        <article class="panel metric-card">
+          <p>上涨数量</p>
+          <h3 id="upCount">-</h3>
+        </article>
+        <article class="panel metric-card">
+          <p>下跌数量</p>
+          <h3 id="downCount">-</h3>
+        </article>
+        <article class="panel metric-card">
+          <p>平均涨跌幅</p>
+          <h3 id="avgChange">-</h3>
+        </article>
+      </section>
+
+      <section class="panel reveal" style="--delay: 0.15s">
+        <div class="section-head">
+          <h2>市场分布</h2>
+        </div>
+        <div id="marketBars" class="bars"></div>
+      </section>
+
+      <section class="panel reveal" style="--delay: 0.2s">
+        <div class="section-head">
+          <h2>个股列表</h2>
+          <div id="marketFilters" class="filters"></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>代码</th>
+                <th>名称</th>
+                <th>市场</th>
+                <th>涨跌幅</th>
+                <th>详情</th>
+                <th>行情</th>
+              </tr>
+            </thead>
+            <tbody id="stockTbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="duo reveal" style="--delay: 0.25s">
+        <article class="panel">
+          <div class="section-head">
+            <h2>涨幅前十</h2>
+          </div>
+          <ol id="gainersList" class="rank-list"></ol>
+        </article>
+        <article class="panel">
+          <div class="section-head">
+            <h2>跌幅前十</h2>
+          </div>
+          <ol id="losersList" class="rank-list"></ol>
+        </article>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
