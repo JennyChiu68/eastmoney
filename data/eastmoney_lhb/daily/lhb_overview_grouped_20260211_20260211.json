@@ -1,0 +1,628 @@
+{
+  "2026-02-11": {
+    "HS": [
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "600292",
+        "security_name": "电投水电",
+        "change_rate": 10.0142,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,600292.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.600292"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "600355",
+        "security_name": "*ST精伦",
+        "change_rate": 5.3435,
+        "trade_market_code": "069001001003",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,600355.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.600355"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "600589",
+        "security_name": "大位科技",
+        "change_rate": 10.0437,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,600589.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.600589"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "600969",
+        "security_name": "郴电国际",
+        "change_rate": -9.9907,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,600969.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.600969"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "600977",
+        "security_name": "中国电影",
+        "change_rate": -9.5468,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,600977.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.600977"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "601112",
+        "security_name": "振石股份",
+        "change_rate": 5.9096,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,601112.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.601112"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "601595",
+        "security_name": "上海电影",
+        "change_rate": -9.3348,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,601595.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.601595"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "601599",
+        "security_name": "浙文影业",
+        "change_rate": -9.9291,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,601599.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.601599"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "603103",
+        "security_name": "横店影视",
+        "change_rate": -9.9975,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,603103.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.603103"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "603150",
+        "security_name": "万朗磁塑",
+        "change_rate": 6.8339,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,603150.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.603150"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "603172",
+        "security_name": "万丰股份",
+        "change_rate": -0.0776,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,603172.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.603172"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "603256",
+        "security_name": "宏和科技",
+        "change_rate": 10.0083,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,603256.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.603256"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "603466",
+        "security_name": "风语筑",
+        "change_rate": 2.9197,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,603466.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.603466"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "603533",
+        "security_name": "掌阅科技",
+        "change_rate": 10.0142,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,603533.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.603533"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "603598",
+        "security_name": "引力传媒",
+        "change_rate": -6.4217,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,603598.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.603598"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "603608",
+        "security_name": "天创时尚",
+        "change_rate": 10.0478,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,603608.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.603608"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "603729",
+        "security_name": "龙韵股份",
+        "change_rate": 10,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,603729.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.603729"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "603888",
+        "security_name": "新华网",
+        "change_rate": -9.7686,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,603888.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.603888"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "603968",
+        "security_name": "醋化股份",
+        "change_rate": 10.0351,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,603968.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.603968"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "603980",
+        "security_name": "吉华集团",
+        "change_rate": 9.9622,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,603980.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.603980"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "605287",
+        "security_name": "德才股份",
+        "change_rate": 10.0054,
+        "trade_market_code": "069001001001",
+        "security_type_code": "058001001",
+        "market_group": "HS",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,605287.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.605287"
+      }
+    ],
+    "KCB": [
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "688035",
+        "security_name": "德邦科技",
+        "change_rate": 19.9922,
+        "trade_market_code": "069001001006",
+        "security_type_code": "058001001",
+        "market_group": "KCB",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,688035.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/1.688035"
+      }
+    ],
+    "SZ": [
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "000056",
+        "security_name": "皇庭国际",
+        "change_rate": -9.9585,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,000056.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.000056"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "000070",
+        "security_name": "特发信息",
+        "change_rate": 9.9876,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,000070.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.000070"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "000638",
+        "security_name": "*ST万方",
+        "change_rate": 5.2632,
+        "trade_market_code": "069001002005",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,000638.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.000638"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "000657",
+        "security_name": "中钨高新",
+        "change_rate": 9.9979,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,000657.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.000657"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "000892",
+        "security_name": "欢瑞世纪",
+        "change_rate": 10.0334,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,000892.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.000892"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "001217",
+        "security_name": "华尔泰",
+        "change_rate": 9.9736,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,001217.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.001217"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "001267",
+        "security_name": "汇绿生态",
+        "change_rate": 10,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,001267.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.001267"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "001330",
+        "security_name": "博纳影业",
+        "change_rate": 7.4579,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,001330.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.001330"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "002181",
+        "security_name": "粤传媒",
+        "change_rate": -9.9017,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,002181.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.002181"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "002340",
+        "security_name": "格林美",
+        "change_rate": 9.9537,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,002340.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.002340"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "002342",
+        "security_name": "巨力索具",
+        "change_rate": -3.64,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,002342.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.002342"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "002378",
+        "security_name": "章源钨业",
+        "change_rate": 9.9881,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,002378.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.002378"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "002485",
+        "security_name": "ST雪发",
+        "change_rate": 4.9896,
+        "trade_market_code": "069001002005",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,002485.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.002485"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "002506",
+        "security_name": "协鑫集成",
+        "change_rate": 0,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,002506.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.002506"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "002723",
+        "security_name": "小崧股份",
+        "change_rate": 10.0379,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,002723.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.002723"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "002739",
+        "security_name": "万达电影",
+        "change_rate": -10.0216,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,002739.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.002739"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "002830",
+        "security_name": "名雕股份",
+        "change_rate": -10,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,002830.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.002830"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "002905",
+        "security_name": "金逸影视",
+        "change_rate": -9.9734,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,002905.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.002905"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "002995",
+        "security_name": "天地在线",
+        "change_rate": -9.4771,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,002995.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.002995"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "003018",
+        "security_name": "金富科技",
+        "change_rate": 10,
+        "trade_market_code": "069001002001",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,003018.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.003018"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "300065",
+        "security_name": "海兰信",
+        "change_rate": 3.0512,
+        "trade_market_code": "069001002002",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,300065.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.300065"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "300166",
+        "security_name": "东方国信",
+        "change_rate": 8.3398,
+        "trade_market_code": "069001002002",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,300166.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.300166"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "300182",
+        "security_name": "捷成股份",
+        "change_rate": 4.7337,
+        "trade_market_code": "069001002002",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,300182.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.300182"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "300196",
+        "security_name": "长海股份",
+        "change_rate": 15.7745,
+        "trade_market_code": "069001002002",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,300196.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.300196"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "300344",
+        "security_name": "*ST立方",
+        "change_rate": 5.036,
+        "trade_market_code": "069001002005",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,300344.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.300344"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "300364",
+        "security_name": "中文在线",
+        "change_rate": -5.9991,
+        "trade_market_code": "069001002002",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,300364.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.300364"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "300819",
+        "security_name": "聚杰微纤",
+        "change_rate": 20,
+        "trade_market_code": "069001002002",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,300819.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.300819"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "300912",
+        "security_name": "凯龙高科",
+        "change_rate": -14.186,
+        "trade_market_code": "069001002002",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,300912.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.300912"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "301025",
+        "security_name": "读客文化",
+        "change_rate": 10.1439,
+        "trade_market_code": "069001002002",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,301025.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.301025"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "301231",
+        "security_name": "荣信文化",
+        "change_rate": -1.1442,
+        "trade_market_code": "069001002002",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,301231.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.301231"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "301526",
+        "security_name": "国际复材",
+        "change_rate": 20.0407,
+        "trade_market_code": "069001002002",
+        "security_type_code": "058001001",
+        "market_group": "SZ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,301526.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.301526"
+      }
+    ],
+    "BJ": [
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "920021",
+        "security_name": "流金科技",
+        "change_rate": -5.6615,
+        "trade_market_code": "069001017",
+        "security_type_code": "058001001",
+        "market_group": "BJ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,920021.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.920021"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "920088",
+        "security_name": "科力股份",
+        "change_rate": 0.3267,
+        "trade_market_code": "069001017",
+        "security_type_code": "058001001",
+        "market_group": "BJ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,920088.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.920088"
+      },
+      {
+        "trade_date": "2026-02-11",
+        "security_code": "920180",
+        "security_name": "爱得科技",
+        "change_rate": -5.7466,
+        "trade_market_code": "069001017",
+        "security_type_code": "058001001",
+        "market_group": "BJ",
+        "detail_link": "https://data.eastmoney.com/stock/lhb,2026-02-11,920180.html",
+        "quote_link": "https://quote.eastmoney.com/unify/r/0.920180"
+      }
+    ]
+  }
+}
