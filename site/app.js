@@ -43,6 +43,22 @@ function classByChange(value) {
   return "change-flat";
 }
 
+function toBeijingTimeText(utcIsoText) {
+  if (!utcIsoText) return "-";
+  const dt = new Date(utcIsoText);
+  if (Number.isNaN(dt.getTime())) return String(utcIsoText);
+  return new Intl.DateTimeFormat("zh-CN", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).format(dt);
+}
+
 async function fetchJson(path) {
   const resp = await fetch(path, { cache: "no-store" });
   if (!resp.ok) throw new Error(`Request failed: ${path}`);
@@ -102,7 +118,8 @@ function renderIndex() {
 
   state.currentDate = state.currentDate || state.index.latest_date;
   el.dateSelect.value = state.currentDate;
-  el.generatedAt.textContent = `数据生成时间(UTC): ${state.index.generated_at_utc}`;
+  const bjText = toBeijingTimeText(state.index.generated_at_utc);
+  el.generatedAt.textContent = `数据生成时间（北京时间）: ${bjText}`;
   renderDatePills();
   updateNavButtons();
 }

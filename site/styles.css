@@ -161,14 +161,15 @@ h1 {
 
 .controls {
   display: grid;
-  gap: 12px;
+  gap: 14px;
 }
 
 .date-control-row {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 10px;
+  grid-template-columns: 118px minmax(280px, 440px) 118px;
+  gap: 12px;
   align-items: end;
+  justify-content: start;
 }
 
 .date-btn {
@@ -192,7 +193,11 @@ h1 {
 .field {
   display: grid;
   gap: 8px;
-  min-width: 220px;
+  min-width: 0;
+}
+
+.date-field {
+  width: 100%;
 }
 
 .field span {
@@ -211,7 +216,7 @@ select {
 
 .meta-wrap {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .meta {
@@ -222,7 +227,8 @@ select {
 .date-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 8px;
+  align-items: center;
 }
 
 .date-pill {
@@ -490,6 +496,7 @@ td a:hover {
 
   .date-control-row {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .date-btn {
