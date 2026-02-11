@@ -67,6 +67,12 @@ function toBeijingTimeText(utcIsoText) {
   }).format(dt);
 }
 
+async function fetchJson(path) {
+  const resp = await fetch(path, { cache: "no-store" });
+  if (!resp.ok) throw new Error(`Request failed: ${path}`);
+  return resp.json();
+}
+
 function fillSelect(selectEl, items, selected) {
   selectEl.innerHTML = "";
   items.forEach((item) => {
