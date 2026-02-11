@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build static dashboard JSON from Eastmoney daily CSV files."""
+"""Build static dashboard JSON from Eastmoney overview CSV files."""
 
 from __future__ import annotations
 
@@ -25,9 +25,9 @@ MARKET_LABELS = {
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build dashboard JSON.")
     parser.add_argument(
-        "--daily-dir",
-        default="data/eastmoney_lhb/daily",
-        help="Directory containing daily overview csv files.",
+        "--source-dir",
+        default="data/eastmoney_lhb",
+        help="Source directory containing overview csv files (root + daily).",
     )
     parser.add_argument(
         "--out-dir",
@@ -86,6 +86,31 @@ def read_csv(path: Path) -> Tuple[Optional[str], List[Dict[str, Any]]]:
     return date_str, normalized
 
 
+def read_csv_grouped_by_day(path: Path) -> Dict[str, List[Dict[str, Any]]]:
+    _, rows = read_csv(path)
+    grouped: Dict[str, List[Dict[str, Any]]] = {}
+    for row in rows:
+        date_str = str(row.get("trade_date") or "")
+        if not date_str:
+            continue
+        grouped.setdefault(date_str, []).append(row)
+    return grouped
+
+
+def file_priority(path: Path) -> int:
+    # Prefer single-day file over range file when both exist for the same day.
+    m = re.search(r"lhb_overview_(\d{8})_(\d{8})\.csv$", path.name)
+    if not m:
+        return 0
+    return 2 if m.group(1) == m.group(2) else 1
+
+
+def discover_overview_files(source_dir: Path) -> List[Path]:
+    root = sorted(source_dir.glob("lhb_overview_*.csv"))
+    daily = sorted((source_dir / "daily").glob("lhb_overview_*.csv"))
+    return root + daily
+
+
 def summarize_day(date_str: str, rows: List[Dict[str, Any]], source_file: str) -> Dict[str, Any]:
     market_counts = Counter(row["market_group"] for row in rows)
     changes = [row["change_rate"] for row in rows if row["change_rate"] is not None]
@@ -131,31 +156,48 @@ def summarize_day(date_str: str, rows: List[Dict[str, Any]], source_file: str) -
     }
 
 
-def build(daily_dir: Path, out_dir: Path) -> Dict[str, Any]:
+def build(source_dir: Path, out_dir: Path) -> Dict[str, Any]:
     ensure_dir(out_dir)
     days_dir = out_dir / "days"
     ensure_dir(days_dir)
 
-    csv_files = sorted(daily_dir.glob("lhb_overview_*.csv"))
-    per_day_file: Dict[str, Path] = {}
+    csv_files = discover_overview_files(source_dir)
+    per_day_rows: Dict[str, List[Dict[str, Any]]] = {}
+    per_day_source: Dict[str, str] = {}
+    per_day_priority: Dict[str, int] = {}
+    per_day_mtime: Dict[str, float] = {}
 
     for csv_file in csv_files:
-        date_str, _ = read_csv(csv_file)
-        if not date_str:
-            continue
-        current = per_day_file.get(date_str)
-        if not current or csv_file.stat().st_mtime > current.stat().st_mtime:
-            per_day_file[date_str] = csv_file
+        grouped_rows = read_csv_grouped_by_day(csv_file)
+        priority = file_priority(csv_file)
+        mtime = csv_file.stat().st_mtime
+        for date_str, rows in grouped_rows.items():
+            exists = date_str in per_day_rows
+            if not exists:
+                per_day_rows[date_str] = rows
+                per_day_source[date_str] = str(csv_file.relative_to(source_dir))
+                per_day_priority[date_str] = priority
+                per_day_mtime[date_str] = mtime
+                continue
 
-    dates_desc = sorted(per_day_file.keys(), reverse=True)
+            if priority > per_day_priority[date_str] or (
+                priority == per_day_priority[date_str] and mtime > per_day_mtime[date_str]
+            ):
+                per_day_rows[date_str] = rows
+                per_day_source[date_str] = str(csv_file.relative_to(source_dir))
+                per_day_priority[date_str] = priority
+                per_day_mtime[date_str] = mtime
+
+    dates_desc = sorted(per_day_rows.keys(), reverse=True)
     day_summaries: Dict[str, Dict[str, Any]] = {}
     total_rows = 0
+    history_rows: List[Dict[str, Any]] = []
 
     for date_str in dates_desc:
-        csv_file = per_day_file[date_str]
-        _, rows = read_csv(csv_file)
+        rows = per_day_rows[date_str]
         total_rows += len(rows)
-        day_data = summarize_day(date_str, rows, csv_file.name)
+        history_rows.extend(rows)
+        day_data = summarize_day(date_str, rows, per_day_source[date_str])
         day_summaries[date_str] = day_data
         with (days_dir / f"{date_str}.json").open("w", encoding="utf-8") as f:
             json.dump(day_data, f, ensure_ascii=False, indent=2)
@@ -178,16 +220,26 @@ def build(daily_dir: Path, out_dir: Path) -> Dict[str, Any]:
     with (out_dir / "latest.json").open("w", encoding="utf-8") as f:
         json.dump(latest_data or {}, f, ensure_ascii=False, indent=2)
 
+    history_rows.sort(
+        key=lambda x: (
+            str(x.get("trade_date", "")),
+            str(x.get("security_code", "")),
+        ),
+        reverse=True,
+    )
+    with (out_dir / "history.json").open("w", encoding="utf-8") as f:
+        json.dump({"rows": history_rows}, f, ensure_ascii=False, indent=2)
+
     return index
 
 
 def main() -> int:
     args = parse_args()
-    daily_dir = Path(args.daily_dir).resolve()
+    source_dir = Path(args.source_dir).resolve()
     out_dir = Path(args.out_dir).resolve()
-    if not daily_dir.exists():
-        raise FileNotFoundError(f"Daily directory not found: {daily_dir}")
-    result = build(daily_dir, out_dir)
+    if not source_dir.exists():
+        raise FileNotFoundError(f"Source directory not found: {source_dir}")
+    result = build(source_dir, out_dir)
     print(
         f"Generated dashboard data: {result['total_days']} day(s), "
         f"{result['total_rows']} row(s), latest={result['latest_date']}"

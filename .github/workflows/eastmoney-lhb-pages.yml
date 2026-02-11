@@ -36,7 +36,7 @@ jobs:
       - name: Build dashboard data
         run: |
           python tools/build_dashboard_data.py \
-            --daily-dir data/eastmoney_lhb/daily \
+            --source-dir data/eastmoney_lhb \
             --out-dir site/data
 
       - name: Deploy to gh-pages branch
