@@ -1,13 +1,24 @@
+const TREND_DAYS = 12;
+const QUICK_PILLS = 10;
+
 const state = {
   index: null,
   currentDate: null,
   dayData: null,
   marketFilter: "ALL",
+  loadToken: 0,
+  trendSeries: [],
 };
 
 const el = {
   dateSelect: document.getElementById("dateSelect"),
+  prevDateBtn: document.getElementById("prevDateBtn"),
+  nextDateBtn: document.getElementById("nextDateBtn"),
+  datePills: document.getElementById("datePills"),
   generatedAt: document.getElementById("generatedAt"),
+  activeDateLabel: document.getElementById("activeDateLabel"),
+  activeDateStats: document.getElementById("activeDateStats"),
+  trendSparkline: document.getElementById("trendSparkline"),
   totalCount: document.getElementById("totalCount"),
   upCount: document.getElementById("upCount"),
   downCount: document.getElementById("downCount"),
@@ -38,6 +49,40 @@ async function fetchJson(path) {
   return resp.json();
 }
 
+function currentIndex() {
+  const dates = state.index?.dates || [];
+  return dates.indexOf(state.currentDate);
+}
+
+function updateNavButtons() {
+  const idx = currentIndex();
+  const dates = state.index?.dates || [];
+  el.prevDateBtn.disabled = idx < 0 || idx >= dates.length - 1;
+  el.nextDateBtn.disabled = idx <= 0;
+}
+
+function renderDatePills() {
+  const dates = state.index?.dates || [];
+  const quick = dates.slice(0, QUICK_PILLS);
+  el.datePills.innerHTML = "";
+  quick.forEach((d) => {
+    const btn = document.createElement("button");
+    btn.className = `date-pill ${d === state.currentDate ? "active" : ""}`;
+    btn.type = "button";
+    btn.textContent = d.slice(5);
+    btn.title = d;
+    btn.addEventListener("click", async () => {
+      if (d === state.currentDate) return;
+      state.currentDate = d;
+      el.dateSelect.value = d;
+      renderDatePills();
+      updateNavButtons();
+      await loadDay(d);
+    });
+    el.datePills.appendChild(btn);
+  });
+}
+
 function renderIndex() {
   const dates = state.index?.dates || [];
   el.dateSelect.innerHTML = "";
@@ -58,6 +103,23 @@ function renderIndex() {
   state.currentDate = state.currentDate || state.index.latest_date;
   el.dateSelect.value = state.currentDate;
   el.generatedAt.textContent = `数据生成时间(UTC): ${state.index.generated_at_utc}`;
+  renderDatePills();
+  updateNavButtons();
+}
+
+function applyTrendTheme(avgChange) {
+  document.body.classList.remove("trend-up", "trend-down");
+  if (avgChange > 0) document.body.classList.add("trend-up");
+  if (avgChange < 0) document.body.classList.add("trend-down");
+}
+
+function renderHero(dayData) {
+  const s = dayData.summary || {};
+  el.activeDateLabel.textContent = dayData.date || "-";
+  el.activeDateStats.textContent = `上榜个股 ${s.total_count ?? "-"} | 平均涨跌幅 ${fmtPercent(
+    s.avg_change
+  )}`;
+  applyTrendTheme(Number(s.avg_change));
 }
 
 function renderMetrics(dayData) {
@@ -124,8 +186,9 @@ function renderTable(dayData) {
     return;
   }
 
-  rows.forEach((row) => {
+  rows.forEach((row, idx) => {
     const tr = document.createElement("tr");
+    tr.style.animationDelay = `${Math.min(idx * 0.015, 0.24)}s`;
     tr.innerHTML = `
       <td>${row.security_code || "-"}</td>
       <td>${row.security_name || "-"}</td>
@@ -157,15 +220,101 @@ function renderRanks(dayData) {
   fillList(el.losersList, dayData.top_losers);
 }
 
+function drawSparkline(series) {
+  if (!el.trendSparkline) return;
+  if (!series.length) {
+    el.trendSparkline.innerHTML = "";
+    return;
+  }
+
+  const width = 240;
+  const height = 68;
+  const padding = 6;
+  const vals = series.map((x) => x.total_count || 0);
+  const max = Math.max(...vals, 1);
+  const min = Math.min(...vals, 0);
+  const span = Math.max(max - min, 1);
+
+  const points = series.map((item, idx) => {
+    const x =
+      padding + (idx * (width - padding * 2)) / Math.max(series.length - 1, 1);
+    const y =
+      height - padding - ((item.total_count - min) / span) * (height - padding * 2);
+    return [Number(x.toFixed(2)), Number(y.toFixed(2))];
+  });
+
+  const polyline = points.map((p) => p.join(",")).join(" ");
+  const area = `M ${padding},${height - padding} L ${points
+    .map((p) => p.join(","))
+    .join(" L ")} L ${width - padding},${height - padding} Z`;
+
+  const currentDate = state.currentDate;
+  const markIdx = series.findIndex((x) => x.date === currentDate);
+  const mark = markIdx >= 0 ? points[markIdx] : points[points.length - 1];
+
+  el.trendSparkline.innerHTML = `
+    <defs>
+      <linearGradient id="sparkStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#b6fff4" />
+        <stop offset="100%" stop-color="#f7fff0" />
+      </linearGradient>
+      <linearGradient id="sparkArea" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="rgba(208,255,249,0.5)" />
+        <stop offset="100%" stop-color="rgba(208,255,249,0.04)" />
+      </linearGradient>
+    </defs>
+    <path d="${area}" fill="url(#sparkArea)"></path>
+    <polyline points="${polyline}" fill="none" stroke="url(#sparkStroke)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+    <circle cx="${mark[0]}" cy="${mark[1]}" r="3.8" fill="#ffffff"></circle>
+  `;
+}
+
+async function loadTrendSeries() {
+  const dates = (state.index?.dates || []).slice(0, TREND_DAYS);
+  const results = await Promise.all(
+    dates.map(async (d) => {
+      try {
+        const day = await fetchJson(`./data/days/${d}.json`);
+        return {
+          date: d,
+          total_count: Number(day.summary?.total_count || 0),
+        };
+      } catch (err) {
+        return { date: d, total_count: 0 };
+      }
+    })
+  );
+  state.trendSeries = results.reverse();
+  drawSparkline(state.trendSeries);
+}
+
 async function loadDay(date) {
+  const token = ++state.loadToken;
   const dayData = await fetchJson(`./data/days/${date}.json`);
+  if (token !== state.loadToken) return;
+
   state.dayData = dayData;
   state.marketFilter = "ALL";
+  renderHero(dayData);
   renderMetrics(dayData);
   renderMarketBars(dayData);
   renderMarketFilters(dayData);
   renderTable(dayData);
   renderRanks(dayData);
+  renderDatePills();
+  updateNavButtons();
+  drawSparkline(state.trendSeries);
+}
+
+async function goOffset(step) {
+  const dates = state.index?.dates || [];
+  const idx = currentIndex();
+  if (idx < 0) return;
+  const target = dates[idx + step];
+  if (!target) return;
+  state.currentDate = target;
+  el.dateSelect.value = target;
+  await loadDay(target);
 }
 
 async function init() {
@@ -173,6 +322,7 @@ async function init() {
     state.index = await fetchJson("./data/index.json");
     state.currentDate = state.index.latest_date;
     renderIndex();
+    await loadTrendSeries();
     if (state.currentDate) {
       await loadDay(state.currentDate);
     }
@@ -184,6 +334,14 @@ async function init() {
 el.dateSelect.addEventListener("change", async (e) => {
   state.currentDate = e.target.value;
   await loadDay(state.currentDate);
+});
+
+el.prevDateBtn.addEventListener("click", async () => {
+  await goOffset(1);
+});
+
+el.nextDateBtn.addEventListener("click", async () => {
+  await goOffset(-1);
 });
 
 init();

@@ -11,20 +11,36 @@
     <div class="bg-orb bg-orb-b"></div>
     <main class="container">
       <header class="hero reveal">
-        <p class="eyebrow">Eastmoney LHB Dashboard</p>
-        <h1>龙虎榜每日看板</h1>
-        <p class="subtitle">
-          通过顶部日期切换查看历史交易日数据，支持按市场筛选浏览。
-        </p>
+        <div class="hero-main">
+          <p class="eyebrow">Eastmoney LHB Dashboard</p>
+          <h1>龙虎榜每日看板</h1>
+          <p class="subtitle">
+            日期即入口。切换顶部日期，页面内容同步切换为对应历史交易日。
+          </p>
+        </div>
+        <div class="hero-side">
+          <p class="hero-kicker">当前查看日期</p>
+          <h2 id="activeDateLabel">-</h2>
+          <p id="activeDateStats" class="hero-stats">上榜个股 -</p>
+          <div class="spark-wrap">
+            <svg id="trendSparkline" viewBox="0 0 240 68" preserveAspectRatio="none"></svg>
+          </div>
+          <p class="spark-note">近 12 个交易日上榜数量趋势</p>
+        </div>
       </header>
 
       <section class="panel controls reveal" style="--delay: 0.05s">
-        <label class="field">
-          <span>选择日期</span>
-          <select id="dateSelect"></select>
-        </label>
-        <div class="meta">
-          <span id="generatedAt">数据生成时间: -</span>
+        <div class="date-control-row">
+          <button id="prevDateBtn" class="date-btn" type="button">前一日</button>
+          <label class="field">
+            <span>选择日期</span>
+            <select id="dateSelect"></select>
+          </label>
+          <button id="nextDateBtn" class="date-btn" type="button">后一日</button>
+        </div>
+        <div class="meta-wrap">
+          <span id="generatedAt" class="meta">数据生成时间: -</span>
+          <div id="datePills" class="date-pills"></div>
         </div>
       </section>
 
