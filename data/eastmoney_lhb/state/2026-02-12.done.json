@@ -1,0 +1,17 @@
+{
+  "trade_date": "2026-02-12",
+  "captured_at": "2026-02-12T16:25:07.715001+08:00",
+  "watch_start": "15:30",
+  "watch_deadline": "20:00",
+  "watch_interval_minutes": 5.0,
+  "summary": {
+    "start_date": "2026-02-12",
+    "end_date": "2026-02-12",
+    "raw_rows": 43,
+    "overview_rows": 38,
+    "trade_days": 1,
+    "raw_path": "/home/runner/work/eastmoney/eastmoney/data/eastmoney_lhb/daily/lhb_raw_20260212_20260212.csv",
+    "overview_path": "/home/runner/work/eastmoney/eastmoney/data/eastmoney_lhb/daily/lhb_overview_20260212_20260212.csv",
+    "grouped_path": "/home/runner/work/eastmoney/eastmoney/data/eastmoney_lhb/daily/lhb_overview_grouped_20260212_20260212.json"
+  }
+}
