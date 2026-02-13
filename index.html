@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>东方财富龙虎榜看板</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb bg-orb-a"></div>
+    <div class="bg-orb bg-orb-b"></div>
+    <main class="container">
+      <header class="hero reveal">
+        <div class="hero-main">
+          <p class="eyebrow">Eastmoney LHB Dashboard</p>
+          <h1>龙虎榜每日看板</h1>
+          <p class="subtitle">
+            日期即入口。切换顶部日期，页面内容同步切换为对应历史交易日。
+          </p>
+        </div>
+        <div class="hero-side">
+          <p class="hero-kicker">当前查看日期</p>
+          <h2 id="activeDateLabel">-</h2>
+          <p id="activeDateStats" class="hero-stats">上榜个股 -</p>
+          <div class="spark-wrap">
+            <svg id="trendSparkline" viewBox="0 0 240 68" preserveAspectRatio="none"></svg>
+          </div>
+          <p class="spark-note">近 12 个交易日上榜数量趋势</p>
+        </div>
+      </header>
+
+      <section class="panel controls reveal" style="--delay: 0.05s">
+        <div class="date-control-row">
+          <button id="prevDateBtn" class="date-btn" type="button">前一日</button>
+          <div class="date-picker-grid">
+            <label class="field short-field">
+              <span>年份</span>
+              <select id="yearSelect"></select>
+            </label>
+            <label class="field short-field">
+              <span>月份</span>
+              <select id="monthSelect"></select>
+            </label>
+            <label class="field date-field">
+              <span>交易日（北京时间）</span>
+              <select id="dateSelect"></select>
+            </label>
+          </div>
+          <button id="nextDateBtn" class="date-btn" type="button">后一日</button>
+        </div>
+        <div class="meta-wrap">
+          <span id="generatedAt" class="meta">数据生成时间: -</span>
+          <div id="datePills" class="date-pills"></div>
+        </div>
+      </section>
+
+      <section class="metrics reveal" style="--delay: 0.1s">
+        <article class="panel metric-card">
+          <p>上榜个股</p>
+          <h3 id="totalCount">-</h3>
+        </article>
+        <article class="panel metric-card">
+          <p>上涨数量</p>
+          <h3 id="upCount">-</h3>
+        </article>
+        <article class="panel metric-card">
+          <p>下跌数量</p>
+          <h3 id="downCount">-</h3>
+        </article>
+        <article class="panel metric-card">
+          <p>平均涨跌幅</p>
+          <h3 id="avgChange">-</h3>
+        </article>
+      </section>
+
+      <section class="panel reveal" style="--delay: 0.15s">
+        <div class="section-head">
+          <h2>市场分布</h2>
+        </div>
+        <div id="marketBars" class="bars"></div>
+      </section>
+
+      <section class="panel reveal" style="--delay: 0.2s">
+        <div class="section-head">
+          <h2>个股列表</h2>
+          <div id="marketFilters" class="filters"></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>代码</th>
+                <th>名称</th>
+                <th>市场</th>
+                <th>涨跌幅</th>
+                <th>详情</th>
+                <th>行情</th>
+              </tr>
+            </thead>
+            <tbody id="stockTbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="duo reveal" style="--delay: 0.25s">
+        <article class="panel">
+          <div class="section-head">
+            <h2>涨幅前十</h2>
+          </div>
+          <ol id="gainersList" class="rank-list"></ol>
+        </article>
+        <article class="panel">
+          <div class="section-head">
+            <h2>跌幅前十</h2>
+          </div>
+          <ol id="losersList" class="rank-list"></ol>
+        </article>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
